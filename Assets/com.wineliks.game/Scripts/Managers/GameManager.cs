@@ -17,10 +17,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pause;
     [SerializeField] GameObject result;
 
+    private float score;
+    [Space(10)]
+    [SerializeField] Text scoreText;
+
 
     private void Start()
     {
         OpenMenu();
+    }
+
+    private void Update()
+    {
+        if(GamePaused || !game.activeSelf)
+        {
+            return;
+        }
+
+        score += Time.deltaTime * 2.5f;
+        scoreText.text = $"{score:N} m";
     }
 
     public void OpenLeaders(bool IsOpen)
@@ -75,6 +90,13 @@ public class GameManager : MonoBehaviour
     public void OpenResult()
     {
         Destroy(LevelRef);
+
+        if(SettingsManager.VibraEnbled)
+        {
+            Handheld.Vibrate();
+        }
+
+        SFXManager.Instance.PlayEffect(0);
 
         game.SetActive(false);
         result.SetActive(true);

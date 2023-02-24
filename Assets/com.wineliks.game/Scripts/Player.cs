@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,16 +13,26 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        Rigidbody.bodyType = GameManager.GamePaused ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
+
+        if(Input.GetMouseButtonDown(0) && jumpCount < 2)
         {
             jumpCount++;
-            if(jumpCount > 1)
+            if(jumpCount > 2)
             {
-                Rigidbody.velocity = Vector2.zero;
+                return;
             }
 
+            Rigidbody.velocity = Vector2.zero;
             Rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+
+        if(GameManager.GamePaused)
+        {
+            return;
+        }
+
+        transform.Rotate(350.0f * Time.deltaTime * Vector3.back);
     }
 
     private void FixedUpdate()

@@ -5,11 +5,11 @@ public class Level : MonoBehaviour
     private bool IsReady { get; set; }
 
     private Vector2 velocity = Vector2.zero;
-    private const float smoothTime = 0.35f;
+    private const float smoothTime = 0.25f;
 
     private void Start()
     {
-        transform.position = new Vector3(0, 13.0f);
+        transform.position = new Vector3(0, -25.0f);
     }
 
     private void Update()
