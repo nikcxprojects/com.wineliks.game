@@ -71,4 +71,12 @@ public class GameManager : MonoBehaviour
         GamePaused = IsPause;
         pause.SetActive(IsPause);
     }
+
+    public void OpenResult()
+    {
+        Destroy(LevelRef);
+
+        game.SetActive(false);
+        result.SetActive(true);
+    }
 }
