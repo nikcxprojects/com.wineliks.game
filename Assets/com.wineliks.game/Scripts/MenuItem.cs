@@ -26,7 +26,8 @@ public class MenuItem : MonoBehaviour
         IsEnable = false;
         IsDestinated = false;
 
-        transform.localPosition += Vector3.down * 2000;
+        float xOffset = transform.GetSiblingIndex() % 2 == 0 ? 2000 : -2000;
+        transform.localPosition += Vector3.right * xOffset;
 
         StartCoroutine(nameof(Delay));
     }
@@ -38,13 +39,13 @@ public class MenuItem : MonoBehaviour
 
     private void Update()
     {
-        if(!IsEnable || IsDestinated)
+        if (!IsEnable || IsDestinated)
         {
             return;
         }
 
         transform.localPosition = Vector2.MoveTowards(transform.localPosition, TargetPosition, 6000 * Time.deltaTime);
-        if((Vector2)transform.localPosition == TargetPosition)
+        if ((Vector2)transform.localPosition == TargetPosition)
         {
             IsDestinated = true;
         }
