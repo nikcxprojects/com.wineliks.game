@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     public void OpenGame()
     {
+        score = 0;
+
         menu.SetActive(false);
         result.SetActive(false);
 
